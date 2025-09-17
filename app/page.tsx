@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { SearchBar } from "@/components/Search";
-import { RecipeCard } from "@/components/Recipes";
-
+import Link from "next/link";
+import Search from "@/components/Search/Search";
+import RecipeGrid from "@/components/Recipes/RecipeGrid";
 interface Recipe {
   id: number;
   title: string;
@@ -30,18 +30,27 @@ export default function Home() {
   };
 
   return (
-    <section>
-      <h2>What's in your fridge? </h2>
-      <p>
-        Type in your ingredients and discover recipes you can cook right now.
-      </p>
-      <SearchBar onSearch={searchRecipes} />
-
-      <div>
-        {recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
-        ))}
-      </div>
-    </section>
+    <div>
+      {/* Search */}
+      <section>
+        <h1>
+          <Link href="/">🥕 What's in Your Fridge?</Link>
+        </h1>
+        <p>
+          Type in your ingredients and discover recipes you can cook right now.
+        </p>
+        <Search onSearch={searchRecipes} />
+      </section>
+      {/* Recipes */}
+      <section>
+        {recipes.length > 0 ? (
+          <RecipeGrid recipes={recipes} />
+        ) : (
+          <p className="placeholder">
+            No recipes yet — try adding some ingredients!
+          </p>
+        )}
+      </section>
+    </div>
   );
 }

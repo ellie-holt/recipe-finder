@@ -1,3 +1,5 @@
+import styles from "./IngredientChip.module.scss";
+
 interface IngredientChipProps {
   label: string;
   onRemove: () => void;
@@ -8,7 +10,7 @@ export default function IngredientChip({
   onRemove,
 }: IngredientChipProps) {
   return (
-    <div>
+    <div className={styles.chip}>
       <span>{label}</span>
       <button onClick={onRemove}>x</button>
     </div>

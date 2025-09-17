@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import styles from "./layout.module.scss";
 import "../styles/globals.scss";
 
 const geistSans = Geist({
@@ -27,21 +28,19 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {/* Header */}
-        <header>
-          <h1>
-            <Link href="/">🥕 What's in Your Fridge?</Link>
-          </h1>
+        <header className={styles.header}>
           <nav>
-            <Link href="/search">Search</Link>
             <Link href="/favourites">Favourites</Link>
           </nav>
         </header>
 
         {/* Page Content */}
-        <main>{children}</main>
+        <main className={styles.main}>{children}</main>
 
         {/* Footer */}
-        <footer>© {new Date().getFullYear()} Ellie's Recipes</footer>
+        <footer className={styles.footer}>
+          © {new Date().getFullYear()} Ellie's Recipes
+        </footer>
       </body>
     </html>
   );
