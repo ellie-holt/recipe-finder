@@ -3,7 +3,11 @@
 import { useState } from "react";
 import IngredientChip from "./IngredientChip";
 
-export default function SearchBar() {
+interface SearchBarProps {
+  onSearch: (ingredients: string[]) => void;
+}
+
+export default function SearchBar({ onSearch }: SearchBarProps) {
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -48,6 +52,8 @@ export default function SearchBar() {
           onRemove={() => removeIngredient(ingredient)}
         />
       ))}
+
+      <button onClick={() => onSearch(ingredients)}>Search Recipes</button>
     </div>
   );
 }
