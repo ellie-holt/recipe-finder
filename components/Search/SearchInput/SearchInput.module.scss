@@ -1,4 +1,4 @@
-@import "../../../styles/mixins";
+@use "../../../styles/mixins";
 
 .searchInput {
   display: flex;
@@ -15,7 +15,7 @@
 
     &:focus {
       border-color: var(--color-primary);
-      @include focus-ring(var(--color-primary));
+      @include mixins.focus-ring(var(--color-primary));
     }
   }
 
@@ -30,7 +30,7 @@
     white-space: nowrap;
 
     &:focus {
-      @include focus-ring(var(--color-primary));
+      @include mixins.focus-ring(var(--color-primary));
     }
   }
 }

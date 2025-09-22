@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import Search from "@/components/Search/Search";
 import RecipeGrid from "@/components/Recipes/RecipeGrid";
+import styles from "./page.module.scss";
+
 interface Recipe {
   id: number;
   title: string;
@@ -32,9 +34,9 @@ export default function Home() {
   return (
     <div>
       {/* Search */}
-      <section>
+      <section className={styles.searchSection}>
         <h1>
-          <Link href="/">🥕 What's in Your Fridge?</Link>
+          <Link href="/">What’s in your fridge?</Link>
         </h1>
         <p>
           Type in your ingredients and discover recipes you can cook right now.
@@ -42,7 +44,7 @@ export default function Home() {
         <Search onSearch={searchRecipes} />
       </section>
       {/* Recipes */}
-      <section>
+      <section className={styles.recipesSection}>
         {recipes.length > 0 ? (
           <RecipeGrid recipes={recipes} />
         ) : (

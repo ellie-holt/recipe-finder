@@ -1,0 +1,35 @@
+@use "../styles/mixins";
+
+.searchSection {
+  margin-bottom: var(--space-lg);
+
+  h1 {
+    @include mixins.responsive-text(7vw, 6rem);
+    text-align: center;
+    margin-bottom: var(--space-md);
+
+    a {
+      color: var(--color-text);
+      text-decoration: none;
+
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+  }
+
+  p {
+    text-align: center;
+    color: var(--color-muted);
+    margin-bottom: var(--space-md);
+  }
+}
+
+.recipesSection {
+  margin-top: var(--space-lg);
+
+  p {
+    text-align: center;
+    color: var(--color-muted);
+  }
+}
