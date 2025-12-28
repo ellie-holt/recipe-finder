@@ -1,3 +1,16 @@
+$bp-xs: 320px;
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-2xl: 1440px;
+
+$space-xs: 0.25rem;
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 2rem;
+$space-xl: 4rem;
+
 :root {
   /* Colours */
   --color-bg: #fafafa;
@@ -16,9 +29,17 @@
   --fs-xs: 0.75rem;
   --fs-sm: 0.875rem;
   --fs-base: 1rem;
+  --fs-md: 1.1rem;
   --fs-lg: 1.25rem;
   --fs-xl: 1.5rem;
   --fs-xxl: 2rem;
+
+  /* Breakpoints */
+  --bp-xs: 320px;
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
 
   /* Spacing */
   --space-xs: 0.25rem;

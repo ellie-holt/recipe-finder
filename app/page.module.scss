@@ -1,8 +1,7 @@
 @use "../styles/mixins";
+@use "../styles/variables" as *;
 
-.searchSection {
-  margin-bottom: var(--space-lg);
-
+.pageContainer {
   h1 {
     @include mixins.responsive-text(7vw, 6rem);
     text-align: center;
@@ -17,17 +16,111 @@
       }
     }
   }
+}
 
-  p {
-    text-align: center;
-    color: var(--color-muted);
-    margin-bottom: var(--space-md);
+.contentContainer {
+  margin: var(--space-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--space-md);
+
+  > * {
+    flex: 1 1 100%;
+  }
+
+  @media (min-width: $bp-md) {
+    flex-direction: row;
+    align-items: flex-start;
+    > *:first-child {
+      flex: 0 0 170px;
+    }
+
+    > *:last-child {
+      flex: auto;
+    }
+  }
+
+  @media (min-width: $bp-xl) {
+    padding-left: var(--space-lg);
+    padding-right: var(--space-lg);
+    > *:first-child {
+      flex: 0 0 170px;
+    }
+
+    > *:last-child {
+      flex: auto;
+    }
   }
 }
 
-.recipesSection {
-  margin-top: var(--space-lg);
+.searchSection {
+  position: relative;
+  padding-right: var(--space-lg);
+  padding-left: var(--space-lg);
+  padding-top: var(--space-sm);
+  padding-bottom: var(--space-sm);
 
+  @media (min-width: $bp-sm) {
+    width: 375px;
+    position: sticky;
+    top: var(--space-md);
+  }
+
+  @media (min-width: $bp-lg) {
+    height: 40vw;
+    width: 400px;
+  }
+
+  @media (min-width: $bp-2xl) {
+    height: 30vw;
+  }
+}
+
+.searchPanels {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchPromptPanel {
+  flex: 0 0 40%;
+  min-height: 100px;
+
+  @media (min-width: $bp-md) {
+    flex: 0 0 35%;
+  }
+}
+
+.searchPromptContent {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  min-height: 100px;
+  height: 100%;
+
+  p {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    color: var(--color-muted);
+  }
+
+  .handle {
+    width: 10px;
+    height: 30px;
+    align-self: flex-end;
+  }
+}
+
+.searchFormPanel {
+  flex: 1 1 auto;
+  min-height: 280px;
+}
+
+.recipesSection {
   p {
     text-align: center;
     color: var(--color-muted);
