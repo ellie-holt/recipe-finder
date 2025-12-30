@@ -1,18 +1,63 @@
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  const { ingredients } = await request.json();
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Request body must be valid JSON" },
+      { status: 400 }
+    );
+  }
+
+  const ingredients = (body as any)?.ingredients;
+  if (
+    !Array.isArray(ingredients) ||
+    ingredients.some((ing) => typeof ing !== "string")
+  ) {
+    return NextResponse.json(
+      { error: "Ingredients must be an array of strings" },
+      { status: 400 }
+    );
+  }
 
   const apiKey = process.env.SPOONACULAR_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: "Missing API key" }, { status: 500 });
   }
-  const url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.join(
-    ","
-  )}&number=6&apiKey=${apiKey}`;
 
-  const response = await fetch(url);
-  const data = await response.json();
+  const url = new URL("https://api.spoonacular.com/recipes/findByIngredients");
+  url.searchParams.set("ingredients", ingredients.join(","));
+  url.searchParams.set("number", "6");
+  url.searchParams.set("apiKey", apiKey);
+
+  let response: Response;
+  try {
+    response = await fetch(url);
+  } catch {
+    return NextResponse.json(
+      { error: "Failed to fetch recipes from Spoonacular API" },
+      { status: 502 }
+    );
+  }
+
+  let data: unknown;
+  try {
+    data = await response.json();
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid JSON response from Spoonacular API" },
+      { status: 502 }
+    );
+  }
+
+  if (!response.ok) {
+    return NextResponse.json(
+      { error: "Spoonacular API returned an error", details: data },
+      { status: 502 }
+    );
+  }
 
   return NextResponse.json(data);
 }
