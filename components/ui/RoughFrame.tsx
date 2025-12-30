@@ -12,6 +12,10 @@ type RoughFrameProps = {
   radius?: number; // corner radius
   roughness?: number; // sketchiness
   strokeWidth?: number; // line thickness
+
+  fill?: string;
+  fillStyle?: "solid" | "hachure" | "zigzag" | "cross-hatch";
+
   className?: string;
 };
 
@@ -22,6 +26,8 @@ export function RoughFrame({
   radius = 16,
   roughness = 1.5,
   strokeWidth = 1.5,
+  fill = "transparent",
+  fillStyle = "solid",
   className,
 }: RoughFrameProps) {
   const hostRef = useRef<HTMLDivElement | null>(null);
@@ -86,6 +92,8 @@ export function RoughFrame({
       rc.path(roundedRectPath(innerX, innerY, innerW, innerH, radius), {
         roughness,
         strokeWidth,
+        fill,
+        fillStyle,
       });
     };
 
@@ -97,7 +105,15 @@ export function RoughFrame({
     ro.observe(host);
 
     return () => ro.disconnect();
-  }, [frameInset, contentPadding, radius, roughness, strokeWidth]);
+  }, [
+    frameInset,
+    contentPadding,
+    radius,
+    roughness,
+    strokeWidth,
+    fill,
+    fillStyle,
+  ]);
 
   return (
     <div
@@ -124,6 +140,7 @@ export function RoughFrame({
       <div
         style={{
           position: "relative",
+          zIndex: "0",
           width: "100%",
 
           height: "100%",

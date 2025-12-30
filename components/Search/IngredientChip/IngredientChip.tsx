@@ -29,9 +29,7 @@ const IngredientChip = forwardRef<HTMLButtonElement, IngredientChipProps>(
           tabIndex={tabIndex}
           onFocus={onFocus}
           onKeyDown={(e) => onKeyNav(e.key)}
-        >
-          ×
-        </button>
+        ></button>
       </div>
     );
   }

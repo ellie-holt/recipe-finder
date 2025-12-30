@@ -48,6 +48,8 @@ export default function Home() {
               frameInset={1}
               contentPadding={16}
               radius={12}
+              fill="#fff"
+              fillStyle="solid"
             >
               <div className={styles.searchPromptContent}>
                 <p>
@@ -70,8 +72,10 @@ export default function Home() {
             <RoughFrame
               className={styles.searchFormPanel}
               frameInset={1}
-              contentPadding={16}
+              contentPadding={4}
               radius={12}
+              fill="#fff"
+              fillStyle="solid"
             >
               <Search onSearch={searchRecipes} />
             </RoughFrame>
