@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import rough from "roughjs";
 import Search from "@/components/Search/Search";
 import RecipeGrid from "@/components/Recipes/RecipeGrid";
 import { RoughFrame } from "@/components/ui/RoughFrame";
