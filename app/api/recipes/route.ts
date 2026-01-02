@@ -42,22 +42,23 @@ export async function POST(request: Request) {
     );
   }
 
-  let data: unknown;
+  let payload: unknown;
   try {
-    data = await response.json();
+    payload = await response.json();
   } catch {
-    return NextResponse.json(
-      { error: "Invalid JSON response from Spoonacular API" },
-      { status: 502 }
-    );
+    payload = null;
   }
 
   if (!response.ok) {
     return NextResponse.json(
-      { error: "Spoonacular API returned an error", details: data },
+      {
+        error: "Spoonacular API returned an error",
+        upstreamStatus: response.status,
+        details: payload,
+      },
       { status: 502 }
     );
   }
 
-  return NextResponse.json(data);
+  return NextResponse.json(payload);
 }
