@@ -1,15 +1,20 @@
-import { Recipe } from "@/types/recipe";
+import { RecipeSearchResult } from "@/types/recipe";
 import styles from "./RecipeCard.module.scss";
 
 interface RecipeCardProps {
-  recipe: Recipe;
+  recipe: RecipeSearchResult;
+  onSelect: (id: number) => void;
 }
 
-export default function RecipeCard({ recipe }: RecipeCardProps) {
+export default function RecipeCard({ recipe, onSelect }: RecipeCardProps) {
   return (
-    <div className={styles.card}>
+    <button
+      type="button"
+      className={styles.card}
+      onClick={() => onSelect(recipe.id)}
+    >
       <h3 className={styles.title}>{recipe.title}</h3>
       <img src={recipe.image} alt={recipe.title} />
-    </div>
+    </button>
   );
 }
